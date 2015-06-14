@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,25 +25,28 @@ import android.widget.Toast;
 		private NavDrawerGoogle mNavigationDrawerFragment;
 
 		private CharSequence mTitle;
-	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                             Bundle savedInstanceState) {
-	    	
-
-	        View rootView = inflater.inflate(R.layout.google_map, container, false);
-
-	        return rootView;
-	    }
+//	    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//	                             Bundle savedInstanceState) {
+//	    	
+//
+//	        View rootView = inflater.inflate(R.layout.google_map, container, false);
+//
+//	        return rootView;
+//	    }
+		@Override
 	    protected void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
 			setContentView(R.layout.google_map);
 
 			mNavigationDrawerFragment = (NavDrawerGoogle) getSupportFragmentManager()
-					.findFragmentById(R.id.drawer_list);
+					.findFragmentById(R.id.navigation_drawer);
 			mTitle = getTitle();
+			
+			DrawerLayout d = (DrawerLayout) findViewById(R.id.drawer_layout) ;
 
 			// Set up the drawer.
-			mNavigationDrawerFragment.setUp(R.id.drawer_list,
-					(DrawerLayout) findViewById(R.id.drawer_layout));
+			mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
+					d);
 	    }
 	    @Override
 		public void onNavigationDrawerItemSelected(int position) {
@@ -56,18 +60,23 @@ import android.widget.Toast;
 			
 		}
 	    public void onSectionAttached(int number) {
+
+			Log.i("Google_Map.java"," numer of attached section is : "+number);
 			switch (number) {
 			case 1:
+
 				mTitle = getString(R.string.title_activity_google);
+				
 				break;
 			case 2:
-				Intent home = new Intent(this, Rapports.class);
-				startActivity(home);
+				Intent accueil = new Intent(this, Accueil.class);
+				startActivity(accueil);
 				break;
 			case 3:
-				Intent profile = new Intent(this, Accueil.class);
-				startActivity(profile);
+				Intent rapport = new Intent(this, Rapports.class);
+				startActivity(rapport);
 				break;
+				
 			
 			}
 		}
@@ -138,9 +147,9 @@ import android.widget.Toast;
 			@Override
 			public void onAttach(Activity activity) {
 				super.onAttach(activity);
-				((Google_Map) activity).onSectionAttached(getArguments().getInt(
+			((Google_Map) activity).onSectionAttached(getArguments().getInt(
 						ARG_SECTION_NUMBER));
-			}
+		}
 		}
 
 		

@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -67,17 +68,18 @@ private CharSequence mTitle;
 	}
 
 	public void onSectionAttached(int number) {
+		Log.i("Acceuil.java"," numer of attached section is : "+number);
 		switch (number) {
 		case 1:
 			mTitle = getString(R.string.title_activity_accueil);
 			break;
 		case 2:
-			Intent profile = new Intent(this, Google_Map.class);
-			startActivity(profile);
+			Intent map = new Intent(this, Google_Map.class);
+			startActivity(map);
 			break;
 		case 3:
-			Intent chatroom = new Intent(this, Rapports.class);
-			startActivity(chatroom);
+			Intent rapport = new Intent(this, Rapports.class);
+			startActivity(rapport);
 			break;
 		}
 	}

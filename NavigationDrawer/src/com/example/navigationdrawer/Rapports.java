@@ -42,6 +42,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -75,14 +76,14 @@ import android.widget.Toast;
 		{
 
 			super.onCreate(savedInstanceState);
-			setContentView(R.layout.login);
+			setContentView(R.layout.rapports);
 					mNavigationDrawerFragment = (NavDrawerRapports) getSupportFragmentManager()
-					.findFragmentById(R.id.drawer_list);
+					.findFragmentById(R.id.navigation_drawer);
 			mTitle = getTitle();
+			DrawerLayout d = (DrawerLayout) findViewById(R.id.drawer_layout) ;
 
 			// Set up the drawer.
-			mNavigationDrawerFragment.setUp(R.id.drawer_list,
-					(DrawerLayout) findViewById(R.id.drawer_layout));
+			mNavigationDrawerFragment.setUp(R.id.navigation_drawer,d);
 
 			// initialisation d'une progress bar
 			progressDialog = new ProgressDialog(this);
@@ -382,18 +383,22 @@ import android.widget.Toast;
 		}
 
 		public void onSectionAttached(int number) {
+
+			Log.i("Rapports.java"," numer of attached section is : "+number);
 			switch (number) {
 			case 1:
 				mTitle = getString(R.string.title_activity_rapports);
 				break;
 			case 2:
-				Intent home = new Intent(this, Google_Map.class);
-				startActivity(home);
+				Intent accueil = new Intent(this, Accueil.class);
+				startActivity(accueil);
 				break;
+			
 			case 3:
-				Intent profile = new Intent(this, Accueil.class);
-				startActivity(profile);
+				Intent map = new Intent(this, Google_Map.class);
+				startActivity(map);
 				break;
+			
 			
 			}
 		}
@@ -470,7 +475,5 @@ import android.widget.Toast;
 		}
 
 	}
-
-
 
 
